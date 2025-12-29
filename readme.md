@@ -2,8 +2,8 @@
 
 # !!!! This project is still under development !!!!
 
-With this integration you can turn any Radiator based Heating System with Smart Thermostats (TRV) and an to HA connected 
-heat source into a Smart and efficient Central-Heating.
+With this integration you can turn any Radiator based Heating System with Smart Thermostats (TRV) and a HA connected 
+heat source into a smart and efficient Central-Heating.
 
 ## Requirements
 tbd
@@ -14,9 +14,9 @@ Usually when using Smart Thermostats you are controlling those devices with a Sc
 (As the Lovelace Climate-Scheduler card: https://github.com/kneave/climate-scheduler)
 This means the target temperatures of the Thermostats are regulated by Schedulers.
 
-Usually your heat source has one heating Zone with a temperature sensor in one room. Trough Home Assistant you can set 
+Usually your heat source has one heating Zone with a temperature sensor in one room. Trough Home Assistant you can set the
 Target Temperature for this room, which works great. But what about the other thermostats in your house? 
-When you have the temperature sensor (built into the HVAC control unit) in the leaving room and the target temperature is reached,
+When you have the temperature sensor (built into the HVAC control unit) in the living room and the target temperature is reached,
 your heating system will regulate down the flow temperature of your heating. Which means that eventually your other 
 radiators in the house can't get enough heat, even their smart thermostat valves are fully open.
 
