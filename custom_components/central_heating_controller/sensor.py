@@ -43,23 +43,23 @@ class CHCTargetSensor(SensorEntity):
             )
         )
 
-    async def _async_calculate(self, event=None):
+    async def _async_calculate(self, _event=None):
         """The core math logic."""
         total_delta = 0.0
 
-        # 1. Calculate Sum of Delta T
+        # 1. Sum up your TRV deltas
         for trv_id in self._trv_entities:
             state = self.hass.states.get(trv_id)
+            # Use state.state == 'heat' to ensure we only count active demand
             if state and state.state not in ["unavailable", "unknown"]:
                 curr = state.attributes.get("current_temperature")
                 targ = state.attributes.get("temperature")
-                # Sum only if heating and there is a positive delta
-                if curr and targ and targ > curr and state.state == "heat":
+                if curr and targ and targ > curr:
                     total_delta += (targ - curr)
 
         self._total_delta = round(total_delta, 2)
 
-        # 2. Get the HVAC's current room temperature sensor
+        # 2. Get the reference HVAC room temperature
         hvac_state = self.hass.states.get(self._hvac_entity)
         if not hvac_state:
             return
@@ -68,16 +68,16 @@ class CHCTargetSensor(SensorEntity):
         if hvac_room_temp is None:
             return
 
-        # 3. Apply your specific Node-Red logic
+        # 3. Apply your target-shifting logic
         if total_delta > 0.9:
             new_target = hvac_room_temp + 1.0
         elif total_delta > 0.5:
             new_target = hvac_room_temp + 0.5
-        elif total_delta > 0.0:
-            new_target = hvac_room_temp + 0.05
         else:
             new_target = hvac_room_temp - 2.0
 
-        # 4. Update the entity value
+        # 4. Set the sensor state
         self._attr_native_value = round(new_target, 2)
+
+        # Crucial: This tells HA the state has changed and needs to be saved/broadcast
         self.async_write_ha_state()
