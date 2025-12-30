@@ -7,7 +7,7 @@ def calculate_hvac_target(trv_list, hvac_room_temp, max_limit):
         current = trv.current_temperature
 
         # Calculate Delta, ignoring rooms that are satisfied
-        if trv.mode == "heat" and setpoint > current:
+        if trv.mode == "heat" and setpoint > current != "unavailable":
             total_delta += (setpoint - current)
 
     # Apply your logic:

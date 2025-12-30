@@ -51,15 +51,15 @@ The configuration form contains the entities that the integration is interacting
 
 
 #### Inputs (Entities) per Zone
-| Parameter                       | Type   | Required | Description                                                |
-|---------------------------------|--------|----------|------------------------------------------------------------|
-| HVAC Zone temperature           | sensor | yes      | Actual Temp from the HVAC controller temp sensor           |
-| HVAC Target temperature         | sensor | yes      | Actual Target Temp from the HVAC controller                |
-| Heating flow temperature        | sensor | no       | Actual Flow Temp from the HVAC controller                  |
-| Heating flow return temperature | sensor | no       | Actual Flow return Temp from the HVAC controller           |
-| Zones Max Target Temp           | number | yes      | Max Target temperature for the HVAC controller             |
-| Zones Max Flow Target Temp      | number | yes      | Max Target flow temperature for the HVAC controller        |
-| Operation Mode                  | select | yes      | Mode can be Off / Target Room/Zone Temp / Target Flow Temp |
+| Parameter                       | Type   | Required | Description                                           |
+|---------------------------------|--------|----------|-------------------------------------------------------|
+| HVAC Zone temperature           | sensor | yes      | Actual Temp from the HVAC controller temp sensor      |
+| HVAC Target temperature         | sensor | yes      | Actual Target Temp from the HVAC controller           |
+| Heating flow temperature        | sensor | no       | Actual Flow Temp from the HVAC controller             |
+| Heating flow return temperature | sensor | no       | Actual Flow return Temp from the HVAC controller      |
+| Zones Max Target Temp           | number | yes      | Max Target temperature for the HVAC controller        |
+| Zones Max Flow Target Temp      | number | yes      | Max Target flow temperature for the HVAC controller   |
+| Operation Mode                  | select | yes      | Mode can be Off / Target Room Temp / Target Flow Temp |
 
 #### Output Entities per Zone
 | Parameter                   | Type   | ??? | Description                          |
