@@ -6,6 +6,21 @@ import logging
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 
+
+class CHCTargetSensor(SensorEntity):
+    def __init__(self, hass, config_entry):
+        """Initialize the sensor."""
+        self.hass = hass
+        # Extract data from the config_entry object
+        self._config = config_entry.data
+        self._hvac_entity = self._config.get("hvac_entity")
+        self._trv_entities = self._config.get("trv_entities")
+
+        # This gives the entity a unique ID so you can rename it in the UI
+        self._attr_unique_id = f"{config_entry.entry_id}_target_temp"
+        self._attr_name = "CHC Calculated Target"
+        self._attr_native_value = None
+
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up the Central Heating Controller from a UI config entry."""
     # This single line tells HA to load your sensor.py
