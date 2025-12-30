@@ -3,15 +3,14 @@
 import asyncio
 import logging
 
-from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import MAJOR_VERSION, MINOR_VERSION
 from homeassistant.core import HomeAssistant
-from homeassistant.exceptions import ConfigEntryNotReady
-from homeassistant.helpers.device_registry import async_get as async_device_registry_get
-from homeassistant.helpers.device_registry import DeviceRegistry, DeviceEntry
-from homeassistant.helpers.entity_registry import async_get as async_entity_registry_get
-from homeassistant.helpers.entity_registry import (
-    EntityRegistry,
-    async_entries_for_config_entry,
-)
-from homeassistant.util import dt
+from homeassistant.config_entries import ConfigEntry
+
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Set up CHC from a config entry."""
+    await hass.config_entries.async_forward_entry_setups(entry, ["sensor"])
+    return True
+
+async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Unload a config entry."""
+    return await hass.config_entries.async_unload_platforms(entry, ["sensor"])
